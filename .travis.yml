@@ -1,21 +1,20 @@
 sudo: false
 language: node_js
 node_js:
-  - "0.10"
-  - "0.12"
-  - "4"
-  - "6"
   - "8"
+  - "0.10"
+  - "4"
+  - "0.12"
+  - "6"
   - "10"
-
 matrix:
-  include:
-    - node_js: "7"
-      addons:
-        firefox: "52.0"
-      env: BROWSER=true MAKE_TEST=true
+    include:
+      - node_js: "7"
+        addons:
+            firefox: "52.0"
+        env: BROWSER=true MAKE_TEST=true
 env:
-  matrix: BROWSER=false MAKE_TEST=false
+    matrix: BROWSER=false MAKE_TEST=false
 
 after_success: npm run coveralls
 
@@ -31,3 +30,4 @@ script:
   - "[ $MAKE_TEST == false ] || make -j 4"
   # test in firefox
   - "[ $BROWSER == false ] || npm run mocha-browser-test"
+dist: trusty
